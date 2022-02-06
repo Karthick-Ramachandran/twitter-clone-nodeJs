@@ -3,6 +3,7 @@ extends ../layouts/auth-layout.pug
 block content
     .loginContainer
         h1 Login
+        p.text-danger #{error}
         form(method="post")
             input(type="text", name="logUserName", placeholder="username or email", required="")
             input(type="password", name="logPassword", placeholder="Your password", required="")
