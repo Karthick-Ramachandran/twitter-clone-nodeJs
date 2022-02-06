@@ -1,0 +1,27 @@
+extends ../layouts/auth-layout.pug
+
+block content
+    .loginContainer
+        h1 Register
+        form#registerForm(method="post", onsubmit="event.preventDefault(); preventRegister();")
+            input(type="text", name="firstName", placeholder="First Name", required="")
+            input(type="text", name="lastName", placeholder="Last Name", required="")
+            input(type="text", name="userName", placeholder="Username", required="")
+            input(type="email", name="email", placeholder="Email", required="")
+            input#password(type="password", name="password", placeholder="New password", required="")
+            input#passwordConf(type="password", name="passwordConf", placeholder="Confirm password", required="")
+            input(type="submit", value="Register")
+        a(href="/login") Already Have an account ? Login Here
+    script.
+        var password = document.getElementById('password');
+        var conf = document.getElementById('passwordConf');
+
+        function preventRegister() {
+            if(password.value !== conf.value) {
+                document.getElementById('ds').style.display = 'block';
+            } else {
+                document.getElementById('ds').style.display = 'none';
+                document.getElementById('registerForm').submit();
+            }
+        }
+        
