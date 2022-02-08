@@ -22,10 +22,13 @@ app.use(session({
 const loginRoutes = require('./routes/loginRoutes')
 const registerRoutes = require('./routes/registerRoutes')
 const logoutRoutes = require('./routes/logoutRoutes')
+const postRoutes = require('./routes/postRoutes');
 
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
+app.use('/api/posts', postRoutes);
+
 app.get('/', middleware.requireLogin, (req, res) => {
     var payload = {
         pageTitle: "Home",
