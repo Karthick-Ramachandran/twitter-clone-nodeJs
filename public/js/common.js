@@ -23,7 +23,7 @@ submitButton.addEventListener('click', (event) => {
         submitButton.disabled = true;
         var postedBy = postData.data.postedBy;
         var displayName = postData.data.postedBy.firstName + " " + postData.data.postedBy.lastName;
-        var timestamp = postData.data.createdAt;
+        var timestamp = timeDifference(new Date(), new Date(postData.data.createdAt));
         document.getElementById('home').innerHTML += `<div class='post'>
        <div class='mainContentContainer'>
            <div class='userImageContainer'>

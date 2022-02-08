@@ -9,7 +9,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 router.get('/', middleware.requireLogin, async (req, res, next) => {
     try {
-        let posts = await Post.find().populate("postedBy")
+        let posts = await Post.find().populate("postedBy").sort({
+            createdAt: -1
+        })
         return res.json({
             code: 200,
             data: posts
