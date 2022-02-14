@@ -8,6 +8,7 @@ class Database {
         mongoose.connect(`${process.env.mongo_uri}`).then(() => {
             console.log('Database connection successful')
         }).catch(err => {
+            console.log("Couldn't connect to database")
             console.log(err)
         })
     }

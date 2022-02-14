@@ -34,6 +34,12 @@ const userSchema = new Schema({
         type: String,
         default: "/images/profilePic.jpg"
     },
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post',
+        }
+    ]
 
 }, {
     timestamps: true

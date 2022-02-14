@@ -9,7 +9,7 @@ function outputPosts(results, container) {
     container.html("");
     console.log(results.length);
     results.forEach(post => {
-        document.getElementById('home').innerHTML += `<div class='post'>
+        document.getElementById('home').innerHTML += `<div class='post' data-id='${post._id}'>
        <div class='mainContentContainer'>
            <div class='userImageContainer'>
                <img src='${post.postedBy.profilePic}'>
@@ -35,7 +35,7 @@ function outputPosts(results, container) {
                         </button>
                     </div>
                      <div class='postButtonContainer'>
-                         <button>
+                         <button class="likeButton">
                              <i class='far fa-heart'></i>
                          </button>
                     </div>

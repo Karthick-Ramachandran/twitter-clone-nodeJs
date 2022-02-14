@@ -1,3 +1,4 @@
+
 $("#postTextarea").keyup(event => {
     var value = (event.target.value).trim();
     var submitButton = $("#submitPostButton");
@@ -24,7 +25,7 @@ submitButton.addEventListener('click', (event) => {
         var postedBy = postData.data.postedBy;
         var displayName = postData.data.postedBy.firstName + " " + postData.data.postedBy.lastName;
         var timestamp = timeDifference(new Date(), new Date(postData.data.createdAt));
-        document.getElementById('home').innerHTML += `<div class='post'>
+        document.getElementById('home').innerHTML += `<div class='post' data-id='${postData.data._id}'>
        <div class='mainContentContainer'>
            <div class='userImageContainer'>
                <img src='${postedBy.profilePic}'>
@@ -50,7 +51,7 @@ submitButton.addEventListener('click', (event) => {
                         </button>
                     </div>
                      <div class='postButtonContainer'>
-                         <button>
+                         <button class="likeButton">
                              <i class='far fa-heart'></i>
                          </button>
                     </div>
@@ -60,3 +61,36 @@ submitButton.addEventListener('click', (event) => {
    </div>`;
     })
 })
+
+
+const likeButton = document.getElementsByClassName('likeButton')
+
+
+document.addEventListener('click', function(event) {
+    if(event.target.className.includes("fa-heart")) {
+        let postId = getPostId(event.target);
+        console.log(postId);
+
+        if(postId == undefined || postId == null) return
+
+        // put request to like
+        $.ajax({
+            url: `/api/posts/${postId}/like`,
+            method: 'PUT',
+            success: (data) => {
+                console.log(data);
+                if(data.success) {
+                    event.target.classList.remove('far');
+                    event.target.classList.add('fas');
+                }
+            }
+        });
+    }
+});
+
+function getPostId(element) {
+    const isRootElement = element.className.includes('post');
+    let postId = isRootElement ? element : element.closest(".post")
+    postId = postId.dataset.id
+    return postId;
+}
